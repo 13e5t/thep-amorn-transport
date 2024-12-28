@@ -1,7 +1,29 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import { Truck, Phone, Mail, Clock, MapPin, Star } from 'lucide-react';
 
 const TruckingWebsite = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // ตรวจสอบว่าเป็น mobile device หรือไม่
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ['android', 'iphone', 'ipad', 'mobile'];
+      return mobileKeywords.some(keyword => userAgent.includes(keyword));
+    };
+    
+    setIsMobile(checkIsMobile());
+  }, []);
+
+  const handleContact = () => {
+    if (isMobile) {
+      window.location.href = 'tel:0949475353';
+    } else {
+      window.location.href = 'mailto:thep-amorn-transport@gmail.com';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -12,8 +34,11 @@ const TruckingWebsite = () => {
             <h1 className="text-4xl font-bold mb-2">หจก. เทพอมร ทรานสปอร์ต</h1>
             <h2 className="text-2xl mb-4">บริการขนส่งสินค้าทั่วประเทศ</h2>
             <p className="text-xl mb-8">บริการรวดเร็ว ปลอดภัย ไว้วางใจได้</p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50">
-              ติดต่อเรา
+            <button 
+              onClick={handleContact}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50"
+            >
+              {isMobile ? 'โทรหาเรา' : 'ส่งอีเมล'}
             </button>
           </div>
         </div>
@@ -26,17 +51,17 @@ const TruckingWebsite = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Truck className="w-12 h-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">ขนส่งสินค้าทั่วไป</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">ขนส่งสินค้าทั่วไป</h3>
               <p className="text-gray-600">รับขนส่งสินค้าทุกประเภท ด้วยรถบรรทุกที่ได้มาตรฐาน</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Clock className="w-12 h-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">ตรงต่อเวลา</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">ตรงต่อเวลา</h3>
               <p className="text-gray-600">จัดส่งตรงเวลา ติดตามสถานะได้ตลอด 24 ชั่วโมง</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Star className="w-12 h-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">บริการมืออาชีพ</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">บริการมืออาชีพ</h3>
               <p className="text-gray-600">ทีมงานมืออาชีพ พร้อมให้คำปรึกษาตลอดการขนส่ง</p>
             </div>
           </div>
@@ -52,21 +77,21 @@ const TruckingWebsite = () => {
               <Phone className="w-8 h-8 text-blue-600 mr-4" />
               <div>
                 <h3 className="font-semibold text-gray-900">โทรศัพท์</h3>
-                <p className='text-gray-600'>02-XXX-XXXX</p>
+                <p className="text-gray-600">094-947-5353</p>
               </div>
             </div>
             <div className="flex items-center">
               <Mail className="w-8 h-8 text-blue-600 mr-4" />
               <div>
                 <h3 className="font-semibold text-gray-900">อีเมล</h3>
-                <p className='text-gray-600'>contact@example.com</p>
+                <p className="text-gray-600">thep-amorn-transport@gmail.com</p>
               </div>
             </div>
             <div className="flex items-center">
               <MapPin className="w-8 h-8 text-blue-600 mr-4" />
               <div>
                 <h3 className="font-semibold text-gray-900">ที่อยู่</h3>
-                <p className='text-gray-600'>กรุงเทพมหานคร ประเทศไทย</p>
+                <p className="text-gray-600">กรุงเทพมหานคร ประเทศไทย</p>
               </div>
             </div>
           </div>
